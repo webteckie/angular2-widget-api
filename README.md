@@ -1,2 +1,16 @@
-# angular2-widget-samples
-This project implements sample widget components based on angular 2.
+# Installation
+
+    Clone the project
+    
+    Install Dependencies
+        Run "npm install" within project directory
+
+    Build the project
+
+        Run "gulp"
+
+    Run the project
+        Open browser @ http://localhost:7777/
+
+
+    
