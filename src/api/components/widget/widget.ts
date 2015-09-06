@@ -15,8 +15,5 @@ import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
       `
 })
 
-/**
- * This component implements keystoneui widget view. The <content> tag defines a widget content drop area.
- */
 export class Widget {
 }

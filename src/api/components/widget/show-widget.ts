@@ -36,10 +36,6 @@ class MyComponentLoader {
 })
 
 
-/**
- * This component implements a dynamic templateUrl view.  The value of the view will come from the src property configured
- * in the directive.  When angular processes the templateUrl it will automatically get the HTML template with that URL.
- */
 export class ShowWidget {
     src: string;
 
@@ -49,7 +45,5 @@ export class ShowWidget {
                 Promise.all(components.map(comp =>
                     loader.loadIntoLocation(comp,elementRef, 'content'))));
     }
-    doClick(){
-        console.log('clicked')
-    }}
+}
 
