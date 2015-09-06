@@ -38,6 +38,6 @@ The project has both the api as well as a test web server/app:
 The test bootstrapping page is /src/webapp/index.html, which imports the app-container to start things off in testing
 the show-widget api component.
 
-NOTE:  this is project is in-progress development!!!  Until a stable version is released, this component as-is may not
+NOTE:  this project is in-progress development!!!  Until a stable version is released, this component as-is may not
         function correctly.  Also it has a dependency on angular 2, which is in beta and is constantly changing and 
         that may also cause this project to not function correctly, if a different version is used.
