@@ -5,7 +5,7 @@ import {Component, View, CORE_DIRECTIVES, ElementRef, DynamicComponentLoader} fr
 declare var fetch;
 declare var System;
 
-class MyComponentLoader {
+class WidgetLoader {
     loadComponentConfig(url){
         return fetch(url)
             .then(res => res.json())
@@ -21,9 +21,19 @@ class MyComponentLoader {
 }
 
 @Component({
+    // the HTML tag for this component
     selector: 'show-widget',
-    bindings: [MyComponentLoader],
+
+    // bind to the widget loader
+    bindings: [WidgetLoader],
+
+    // let the user tell us where to load the widget from
     properties: ['src: src'],
+
+    // mount a DOMContentLoaded event handler onto the host element
+    host: {
+        '(DOMContentLoaded)': 'load()'
+    }
 })
 
 @View({
@@ -38,12 +48,21 @@ class MyComponentLoader {
 
 export class ShowWidget {
     src: string;
+    widgetLoader: WidgetLoader;
+    loader: DynamicComponentLoader;
+    elementRef: ElementRef;
 
-    constructor(myLoader: MyComponentLoader, loader: DynamicComponentLoader, elementRef:ElementRef) {
-        myLoader.loadComponentConfig('./config.json')
+    constructor(widgetLoader: WidgetLoader, loader: DynamicComponentLoader, elementRef:ElementRef) {
+        this.widgetLoader = widgetLoader;
+        this.loader = loader;
+        this.elementRef = elementRef;
+    }
+
+    load(){
+        this.widgetLoader.loadComponentConfig(this.src)
             .then(components =>
                 Promise.all(components.map(comp =>
-                    loader.loadIntoLocation(comp,elementRef, 'content'))));
+                    this.loader.loadIntoLocation(comp, this.elementRef, 'content'))));
     }
 }
 
