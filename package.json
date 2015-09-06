@@ -1,20 +1,19 @@
 {
-  "name": "angular2-boilerplate",
-  "version": "1.0.0",
-  "description": "Simple CRUD application with Angular 2",
-  "main": "dist/angular2-boilerplate.js",
+  "name": "angular2-widget-api",
+  "version": "0.0.1",
+  "description": "Angular 2 widget api to retrieve remote widgets onto a page.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "angular2",
-    "node",
-    "express",
-    "postgresql"
+    "widget",
+    "api"
   ],
   "author": {
-    "name": "Norbert Annus",
-    "email": "norbert.annus@opencredo.com"
+    "name": "Carlos Colon",
+    "email": "webteckie@gmail.com"
   },
   "license": "MIT",
   "devDependencies": {
