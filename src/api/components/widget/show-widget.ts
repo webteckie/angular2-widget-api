@@ -1,6 +1,14 @@
 /// <reference path="../../../../typings/angular2/angular2.d.ts" />
 
-import {Component, View, CORE_DIRECTIVES, ElementRef, DynamicComponentLoader} from 'angular2/angular2';
+import {
+        Component,
+        View,
+        CORE_DIRECTIVES,
+        ElementRef,
+        DynamicComponentLoader,
+        LifecycleEvent,
+        Attribute
+} from 'angular2/angular2';
 
 declare var fetch;
 declare var System;
@@ -30,10 +38,8 @@ class WidgetLoader {
     // let the user tell us where to load the widget from
     properties: ['src: src'],
 
-    // mount a DOMContentLoaded event handler onto the host element
-    host: {
-        '(DOMContentLoaded)': 'load()'
-    }
+    // handle component events
+    lifecycle: [LifecycleEvent.onInit]
 })
 
 @View({
@@ -58,7 +64,9 @@ export class ShowWidget {
         this.elementRef = elementRef;
     }
 
-    load(){
+    // Lifecycle.onInit -- load the configured widget
+    onInit(){
+        console.log('*******'+this.src);
         this.widgetLoader.loadComponentConfig(this.src)
             .then(components =>
                 Promise.all(components.map(comp =>
