@@ -10,23 +10,31 @@ import {
         Attribute
 } from 'angular2/angular2';
 
+import {WidgetContainer} from '../widget-container/widget-container';
+
 declare var fetch;
 declare var System;
 
 class WidgetLoader {
-    loadComponentConfig(url){
+    loadWidget(url){
         return fetch(url)
             .then(res => res.json())
-            .then(componentList =>
-                Promise.all(componentList.map(config =>
-                    this.loadComponent(config))))
-    }
-    loadComponent(configObject){
-        return System.import(configObject.path)
-            .then(componentModule =>
-                componentModule[configObject.component])
     }
 }
+//class WidgetLoader {
+//    loadComponentConfig(url){
+//        return fetch(url)
+//            .then(res => res.json())
+//            .then(componentList =>
+//                Promise.all(componentList.map(config =>
+//                    this.loadComponent(config))))
+//    }
+//    loadComponent(configObject){
+//        return System.import(configObject.path)
+//            .then(componentModule =>
+//                componentModule[configObject.component])
+//    }
+//}
 
 @Component({
     // the HTML tag for this component
@@ -43,7 +51,7 @@ class WidgetLoader {
 })
 
 @View({
-    directives: [CORE_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, WidgetContainer],
     template: `
         <div #content>
             Loading widget...
@@ -66,11 +74,9 @@ export class ShowWidget {
 
     // Lifecycle.onInit -- load the configured widget
     onInit(){
-        console.log('*******'+this.src);
-        this.widgetLoader.loadComponentConfig(this.src)
-            .then(components =>
-                Promise.all(components.map(comp =>
-                    this.loader.loadIntoLocation(comp, this.elementRef, 'content'))));
+        this.widgetLoader.loadWidget(this.src)
+            .then(widget =>
+                this.loader.loadIntoLocation(widget.content, this.elementRef, 'content'));
     }
 }
 

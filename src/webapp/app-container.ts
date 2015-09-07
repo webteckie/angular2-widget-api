@@ -7,7 +7,9 @@
 // Angular 2
 import {Component, View, CORE_DIRECTIVES, bootstrap} from 'angular2/angular2';
 
-import {ShowWidget} from '../api/components/widget/show-widget';
+//import {RouteConfig} from 'angular2/router';
+
+import {ShowWidget} from '../api/components/show-widget/show-widget';
 
 
 @Component({
@@ -18,10 +20,14 @@ import {ShowWidget} from '../api/components/widget/show-widget';
     directives: [ CORE_DIRECTIVES, ShowWidget ],
     template: `
       <div>
-        <show-widget [src]="'config.json'"></show-widget>
+        <show-widget [src]="'/api/widget/1'"></show-widget>
       </div>
     `
 })
+
+//@RouteConfig([
+//    { path: '/widget/1',  as: 'widget',      component: WidgetContainer }
+//])
 
 export class AppContainer {
     title: string;
