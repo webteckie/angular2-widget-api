@@ -12,29 +12,15 @@ import {
 
 import {WidgetContainer} from '../widget-container/widget-container';
 
-declare var fetch;
+// forward declarations to avoid compiler warnings
 declare var System;
 
 class WidgetLoader {
-    loadWidget(url){
-        return fetch(url)
-            .then(res => res.json())
+    loadComponent(configObject){
+        console.log('****configObject: '+JSON.stringify(configObject));
+        return System.import(configObject.path).then(componentModule => componentModule[configObject.component] );
     }
 }
-//class WidgetLoader {
-//    loadComponentConfig(url){
-//        return fetch(url)
-//            .then(res => res.json())
-//            .then(componentList =>
-//                Promise.all(componentList.map(config =>
-//                    this.loadComponent(config))))
-//    }
-//    loadComponent(configObject){
-//        return System.import(configObject.path)
-//            .then(componentModule =>
-//                componentModule[configObject.component])
-//    }
-//}
 
 @Component({
     // the HTML tag for this component
@@ -62,6 +48,7 @@ class WidgetLoader {
 
 export class ShowWidget {
     src: string;
+    content: HTMLElement;
     widgetLoader: WidgetLoader;
     loader: DynamicComponentLoader;
     elementRef: ElementRef;
@@ -74,9 +61,15 @@ export class ShowWidget {
 
     // Lifecycle.onInit -- load the configured widget
     onInit(){
-        this.widgetLoader.loadWidget(this.src)
-            .then(widget =>
-                this.loader.loadIntoLocation(widget.content, this.elementRef, 'content'));
+        var widgetContainer = {
+            "component": "WidgetContainer",
+            "path": "/api/components/widget-container/widget-container"
+        };
+
+        System.import(widgetContainer.path).then(componentModule => componentModule[widgetContainer.component] )
+        .then(component => {
+           this.loader.loadIntoLocation(component, this.elementRef, 'content')
+        });
     }
 }
 
