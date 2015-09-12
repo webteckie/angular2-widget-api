@@ -10,10 +10,6 @@ import {
         Attribute
 } from 'angular2/angular2';
 
-//import {WidgetContainer} from '../widget-container/widget-container';
-
-//console.log(WidgetContainer);
-
 // forward declarations to avoid compiler warnings
 declare var System;
 
