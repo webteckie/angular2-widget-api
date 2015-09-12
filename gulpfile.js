@@ -33,6 +33,7 @@ gulp.task('compile-ts', function () {
                 module: 'commonjs',
                 target: 'ES5',
                 emitDecoratorMetadata: true,
+                experimentalDecorators: true,
                 declarationFiles: false,
                 noExternalResolve: true
             }));

@@ -4,7 +4,6 @@ import {
         Component,
         View,
         LifecycleEvent,
-        ElementRef,
         CORE_DIRECTIVES
 } from 'angular2/angular2';
 
@@ -18,26 +17,21 @@ declare var fetch;
     selector: 'widget-container',
 
     // handle component events
-    lifecycle: [LifecycleEvent.onInit]
+    lifecycle: [LifecycleEvent.OnInit]
 })
 
 @View({
     directives: [CORE_DIRECTIVES],
     template: `
-        <div id="wc-1" class="widget-container">
-            <content select="[content]"></content>
+        <div class="widget-container">
         </div>
       `
 })
 
 export class WidgetContainer {
-    content: string;
-    elementRef: ElementRef;
     parent: ShowWidget;
 
-    constructor(elementRef:ElementRef, parent: ShowWidget){
-        this.elementRef = elementRef;
-
+    constructor(parent:ShowWidget){
         this.parent = parent;
     }
 
@@ -45,9 +39,7 @@ export class WidgetContainer {
     onInit(){
         fetch(this.parent.src).then(res => res.json())
         .then(widget => {
-            this.content = widget.content;
-            console.log('yeah, fetched the html content: '+this.content);
+            (<HTMLElement>document.querySelector('.widget-container')).innerHTML = widget.content;
         });
-        // TODO:  how to activate this content in the template?
     }
 }

@@ -10,7 +10,9 @@ import {
         Attribute
 } from 'angular2/angular2';
 
-import {WidgetContainer} from '../widget-container/widget-container';
+//import {WidgetContainer} from '../widget-container/widget-container';
+
+//console.log(WidgetContainer);
 
 // forward declarations to avoid compiler warnings
 declare var System;
@@ -33,11 +35,11 @@ class WidgetLoader {
     properties: ['src: src'],
 
     // handle component events
-    lifecycle: [LifecycleEvent.onInit]
+    lifecycle: [LifecycleEvent.OnInit]
 })
 
 @View({
-    directives: [CORE_DIRECTIVES, WidgetContainer],
+    directives: [CORE_DIRECTIVES],
     template: `
         <div #content>
             Loading widget...
@@ -47,8 +49,7 @@ class WidgetLoader {
 
 
 export class ShowWidget {
-    src: string;
-    content: HTMLElement;
+    public src: string;
     widgetLoader: WidgetLoader;
     loader: DynamicComponentLoader;
     elementRef: ElementRef;

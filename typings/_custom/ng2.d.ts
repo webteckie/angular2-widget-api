@@ -37,9 +37,9 @@ declare module 'angular2/src/services/url_resolver' {
 declare module "angular2/src/facade/async" {
     class Observable {}
     class EventEmitter {
-        next(val:any);
-        return(val:any);
-        throw(val:any);
+        next(val:any)
+        return(val:any)
+        throw(val:any)
     }
 }
 
@@ -77,17 +77,17 @@ declare module "angular2/forms" {
         group(controls: any): any;
     }
     class Control {
-        constructor(controls: any);
-        updateValue(value: any);
+        constructor(controls: any)
+        updateValue(value: any)
         _valueChanges: any
         valueChanges: any
     }
     class ControlArray {
-        removeAt(index: any);
-        push(item: any);
+        removeAt(index: any)
+        push(item: any)
     }
     class ControlGroup {
-        constructor(controls: any);
+        constructor(controls: any)
         controls: any;
         valueChanges: any;
     }
@@ -101,10 +101,10 @@ declare module "angular2/render" {
         constructor(styleInliner: any, styleUrlResolver: any, styleHost: any)
     }
     class EmulatedUnscopedShadowDomStrategy {
-        constructor(styleUrlResolver: any, styleHost: any);
+        constructor(styleUrlResolver: any, styleHost: any)
     }
     class NativeShadowDomStrategy {
-        constructor(styleUrlResolver: any);
+        constructor(styleUrlResolver: any)
     }
     class ShadowDomStrategy {}
 }
@@ -120,16 +120,15 @@ declare module "angular2/src/facade/browser" {
     const KeyboardEvent: any;
 }
 
-//declare module "angular2/src/router/browser_location" {
-//    class BrowserLocation {
-//        path(): string
-//    }
-//}
+declare module "angular2/src/router/browser_location" {
+    class BrowserLocation {
+        path(): string
+    }
+}
 
 declare module "angular2/src/router/location" {
     class Location {
-        path(): string;
-        normalize(url: string): string;
+        normalize(url: string): string
     }
 }
 
