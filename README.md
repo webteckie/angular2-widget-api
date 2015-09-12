@@ -1,14 +1,42 @@
 # Angular 2 Widget API
-This is a simple widget api.  It allows for a page to dynamically insert any number of widgets in it.  For example:
+This is a simple widget api.  It allows for a page to dynamically insert any number of widgets in it.  A widget is an
+addressable component (via the src attribute) that renders any HTML.  This API will dynamically render the widget's
+HTML in place.  For example:
+
+Assuming the following app and widget components:
+
+    /app:
+        <div></div>
+        
+    /api/ads-widget:
+        <div>Awesome Vacation Rental</div>
  
+    /api/rss-feed-widget:
+        <div>Best angular2 widget api released!</div>
+
+    /api/stock-tick-widget:
+        <div>DOW ^200</div>
+
+Then given the following page:
+
     <app>
-        <show-widget src="/widget-1"/>
-        ...
-        <show-widget src="/widget-2"/>
-        ...
-        <show-widget src="/widget-3"/>
+        <show-widget src="/api/ads-widget"/>
+        
+        <show-widget src="/api/rss-feed-widget"/>
+        
+        <show-widget src="/api/stock-tick-widget"/>
         ...
     </app>
+
+The following HTML will get generated:
+
+    <div>
+        <div>Awesome Vacation Rental</div>
+
+        <div>Best angular2 widget api released!</div>
+
+        <div>DOW ^200</div>
+    </div>
     
     
 ## Installation
